@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.rest.common.persistence.dao.MtimeFieldTMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.rest.common.persistence.model.MtimeFieldT">
+        <id column="UUID" property="uuid" />
+        <result column="cinema_id" property="cinemaId" />
+        <result column="film_id" property="filmId" />
+        <result column="begin_time" property="beginTime" />
+        <result column="end_time" property="endTime" />
+        <result column="hall_id" property="hallId" />
+        <result column="hall_name" property="hallName" />
+        <result column="price" property="price" />
+    </resultMap>
+
+    <resultMap id="HallInfoResultMap" type="com.stylefeng.guns.rest.common.persistence.model.HallInfoVO">
+        <id column="UUID" property="hallFieldId" />
+        <result column="hall_name" property="hallName" />
+        <result column="price" property="price" />
+        <result column="seat_address" property="seatFile" />
+    </resultMap>
+
+    <select id="getHallInfo"  resultMap="HallInfoResultMap">
+        select a.UUID, hall_name, price, seat_address
+        from mtime_field_t a, mtime_hall_dict_t b
+        where a.hall_id = b.UUID and a.UUID = #{fieldId}
+    </select>
+</mapper>
